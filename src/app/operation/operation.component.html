@@ -27,13 +27,14 @@
     <nav class="navbar navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand">Arithmetic Calculator Nav Menu</a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Arithmetic Calculator</h5>
-                    <button class="btn btn-danger" href="/login">Log out</button>
+                    <button class="btn btn-danger" routerLinkActive="router-link-active" (click)="salir()">Log out</button>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -79,24 +80,24 @@
     </div>
 
 
-    <form [formGroup]="formularioOperacion">
+    <form>
 
         <div class="container">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Value 1</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" formControlName='value1' [(ngModel)]="value1">
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" [(ngModel)]="value1" name="value1" id="value1">
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Value 2</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" formControlName="value2" [(ngModel)]="value2">
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" [(ngModel)]="value2" name="value2" id="value2">
             </div>
-            <select id="opciones" class="form-select" aria-label="Default select example" formControlName="selectOption" [(ngModel)]="opcion" required>
+            <select id="opcion" class="form-select" aria-label="Default select example" [(ngModel)]="opcion" name="opcion" required>
         <option selected>Open this select menu</option>
           <option value="addition">Addition</option>
           <option value="substraction">Substraction</option>
           <option value="square">Square root</option>
           <option value="multiplication">Multiplication</option>
-          <option value="randomString">random string generator</option>
+          <option value="division">Division</option>
         </select><br>
             <button type="submit" id="botonSubmit" class="btn btn-warning" (click)="OperationProcess()">
           send request for approval
@@ -104,13 +105,17 @@
             <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
           </svg>
         </button>
-
         </div>
     </form>
     <div class="container">
         <p>resultado: {{resultado}}</p>
         <p>current balance: {{current_balance}}</p>
     </div>
+
+    <form>
+        <div class="container">
+        </div>
+    </form>
 
 
 

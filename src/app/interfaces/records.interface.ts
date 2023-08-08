@@ -8,7 +8,7 @@ export default interface Records{
     date: Date;
 }
 
-export default interface Operation{
+/*export default interface Operation{
     id_operation?: string;
     type_operation: string;
     cost_operation: number;
@@ -19,4 +19,4 @@ export default interface User{
     username: string;
     password: string;
     status: boolean;
-}
+}*/

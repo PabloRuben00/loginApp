@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, deleteDoc, doc } from '@angular/fire/firestore';
 import  Records from '../app/interfaces/records.interface';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -19,23 +19,44 @@ export class ServicesService {
   //https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]
 
   constructor(private firestore: Firestore, private http: HttpClient) { }
-  logout(){}
+  addRecords(record:Records){
+    const recordsRef = collection(this.firestore, 'registros');
+    return addDoc(recordsRef, record);
 
-
-  login(usuario:UsuarioModel){
-    const authData ={
-      ...usuario,
-      /*email: usuario.email,
-      password:usuario.password,*/
-      returnSecureToken: true
-    };
-    return this.http.post(
-      `${this.url}/accounts:signInWithPassword?key=${ this.apiKey}`,
-      authData
-    );
+  }
+  getRecords(): Observable<Records[]>{
+    const registroReference = collection(this.firestore, 'registros');
+    return collectionData(registroReference, {idField:'id'}) as Observable<Records[]>;
+    
   }
 
+  deleteRecords(record : Records){
+    const recordsReference = doc(this.firestore, `record/${record.id}`);
+    return deleteDoc(recordsReference);
+  }
 
+  logout(){
+    localStorage.removeItem('token');
+  }
+
+  login(usuario: UsuarioModel){
+    const authData ={
+      ...usuario,
+      returnSecureToken: true
+    };
+
+    return this.http.post(
+      `${ this.url }/accounts:signInWithPassword?key=${this.apiKey}`,
+      authData
+    ).pipe(
+      map(resp =>{
+        console.log('entro en el mapas de rjx');
+        //this.guardarToken(resp['idToken']);
+        return resp;
+
+      })
+  );
+  }
   nuevoUsuario(usuario:UsuarioModel){
     const authData ={
       ...usuario,
@@ -54,7 +75,7 @@ export class ServicesService {
     );
   }
 
-  private guardarToken(idToken: string){
+  private guardarToken(idToken:string){
     this.userToken = idToken;
     localStorage.setItem('token', idToken);
   }
@@ -68,12 +89,10 @@ export class ServicesService {
     return this.userToken;
   }
 
-}
+  estaAutenticado(): boolean{
+    return this.userToken.length > 2;
+  }
 
-export interface operation{
-  valor1:number;
-  valor2:number;
-  operacion:string;
-  id_record?:Number;
 
 }
+
