@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+        #opciones {
+            width: 480px;
+        }
+        
+        .container {
+            width: 500px;
+        }
+        
+        #botonSubmit {
+            width: 480px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <br><br><br>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+    <div class="container">
+        <h1>Arithmetic Calculator App
+        </h1>
+        <br>
+        <h3>Log in</h3>
+    </div>
+
+    <form (ngSubmit)="login( f )" #f="ngForm">
+
+        <div class="container animated fadeInLeft">
+            <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger animated fadeIn">Email is require!</span>
+            <div class="input-group mb-3">
+                <input type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="email" [(ngModel)]="usuario.email" required email placeholder="email">
+            </div>
+            <span *ngIf="f.submitted && f.controls['password'].errors" class="text-danger animated fadeIn">Password is wrong or lengh minus to 6!</span>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required name="password" [(ngModel)]="usuario.password" minlength="6" placeholder="password">
+            </div>
+            <br>
+
+            <div class="contact100-form-checkbox">
+                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                <label class="label-checkbox100" for="ckb1">
+                    &nbsp;Recordar mi usuario
+                </label>
+            </div>
+            <button id="botonSubmit" class="btn btn-primary">
+          Log in
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+            <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+          </svg>
+        </button>
+            <div>
+                <a href="/register" class="txt1">
+                do not have an account yet?
+            </a>
+            </div>
+        </div>
+    </form>
+
+
+
+
+</body>
+
+</html>
